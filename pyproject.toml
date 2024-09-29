@@ -1,0 +1,20 @@
+[project]
+name = "swf"
+dependencies = [
+    "pandas",
+    "numpy",
+    "IPython",
+]
+requires-python = ">=3.9"
+version = "2024.0"
+
+[tool.setuptools]
+packages = ["swf"]
+
+[tool.setuptools.package-dir]
+swf = "src"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
