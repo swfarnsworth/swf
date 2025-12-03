@@ -1,3 +1,5 @@
+import copy
+import functools
 import json
 import warnings
 from typing import Sequence, Any
@@ -5,6 +7,7 @@ from typing import Sequence, Any
 __all__ = [
     'traverse',
     'jsonl_gen',
+    'deepcache',
 ]
 
 
@@ -45,3 +48,17 @@ def traverse(data, keys: Sequence[int | str | type[dict, list]], raise_exception
 def jsonl_gen(jsonl_path):
     with open(jsonl_path) as f:
         yield from map(json.loads, f)
+
+
+def deepcache(func):
+    cached_func = functools.cache(func)
+
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        value = cached_func(*args, **kwargs)
+        return copy.deepcopy(value)
+
+    wrapper.cache_clear = cached_func.cache_clear
+    wrapper.cache_info = cached_func.cache_info
+
+    return wrapper
