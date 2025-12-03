@@ -1,12 +1,10 @@
 [project]
 name = "swf"
-dependencies = [
-    "pandas",
-    "numpy",
-    "IPython",
-]
 requires-python = ">=3.9"
 version = "2024.0"
+dependencies = [
+    "pytest>=8.4.2",
+]
 
 [tool.setuptools]
 packages = ["swf"]
@@ -18,3 +16,7 @@ swf = "src"
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
