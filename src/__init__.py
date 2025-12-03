@@ -38,12 +38,13 @@ def traverse(data, keys: Sequence[int | str | type[dict, list]], raise_exception
 
         try:
             data = data[k]
-        except (IndexError, KeyError) as e:
+        except (IndexError, KeyError, TypeError) as e:
             if raise_exception:
                 raise e
             return default
 
     return data
+
 
 def jsonl_gen(jsonl_path):
     with open(jsonl_path) as f:
